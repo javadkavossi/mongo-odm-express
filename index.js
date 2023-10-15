@@ -1,8 +1,15 @@
 const express = require("express");
+
+// --------------- error Handller ------------
 const {
     ErrorHandler,
     NotFoundError
 } = require("./util/errorHandler");
+
+
+// --------------- error Handller ------------
+
+
 const {
     BlogModel
 } = require("./model/blog.model");
@@ -83,6 +90,11 @@ app.get("/insert-many", async (req, res, next) => {
         next(error)
     }
 })
+
+
+
+// =====================   find   ==============================
+
 app.get("/blogs", async (req, res, next) => {
     const blogs = await BlogModel.find({});
     res.send({
@@ -91,6 +103,7 @@ app.get("/blogs", async (req, res, next) => {
         blogs
     })
 })
+// -----------------------  findOne  --------------------------
 app.get("/blogs/:id", async (req, res, next) => {
     try {
         const {
@@ -108,6 +121,12 @@ app.get("/blogs/:id", async (req, res, next) => {
         next(error)
     }
 })
+
+// =====================   delete    ==============================
+
+// -----------------------  deleteOne  --------------------------
+
+
 app.delete("/blogs/:id", async (req, res, next) => {
     try {
         const {
@@ -125,6 +144,8 @@ app.delete("/blogs/:id", async (req, res, next) => {
         next(error)
     }
 })
+// -----------------------  deleteMany  --------------------------
+
 app.delete("/blogs", async (req, res, next) => {
     try {
         const result = await BlogModel.deleteMany({});
@@ -133,6 +154,10 @@ app.delete("/blogs", async (req, res, next) => {
         next(error)
     }
 })
+// =====================   update    ==============================
+
+// --------------------- update Object.assign ----------------------
+
 app.put("/blogs/:id", async (req, res, next) => {
     try {
         const {
@@ -153,6 +178,9 @@ app.put("/blogs/:id", async (req, res, next) => {
         next(error)
     }
 })
+
+// --------------------- update updateOne ----------------------
+
 app.patch("/blogs/:id", async (req, res, next) => {
     try {
         const {
